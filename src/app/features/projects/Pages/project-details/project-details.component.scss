@@ -1,0 +1,266 @@
+
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.project-details-page {
+  padding: 0;
+}
+
+.details-header-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.details-header-actions .btn {
+  min-height: 39px;
+  padding: 9px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.details-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  align-items: start;
+  gap: 22px;
+}
+
+.details-main,
+.details-sidebar {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 20px;
+}
+
+.project-overview-card {
+  padding: 26px;
+}
+
+.overview-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.overview-project-icon {
+  display: grid;
+  flex: 0 0 58px;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  color: var(--df-primary);
+  background: var(--df-primary-light);
+  border-radius: 14px;
+  font-size: 26px;
+}
+
+.overview-title {
+  min-width: 0;
+}
+
+.project-reference {
+  color: var(--df-text-secondary);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+.overview-title h2 {
+  margin: 6px 0 0;
+  overflow-wrap: anywhere;
+  font-size: 21px;
+}
+
+.overview-divider {
+  height: 1px;
+  margin: 25px 0;
+  background: var(--df-border);
+}
+
+.section-subtitle {
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.overview-description {
+  margin: 0;
+  color: var(--df-text-secondary);
+  font-size: 13px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.project-work-card {
+  padding: 24px;
+}
+
+.section-heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.section-heading-row h2 {
+  margin-bottom: 6px;
+  font-size: 16px;
+}
+
+.section-heading-row p {
+  margin-bottom: 0;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.feature-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 235px;
+  padding: 28px 18px;
+  text-align: center;
+}
+
+.placeholder-icon {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  margin-bottom: 17px;
+  place-items: center;
+  color: var(--df-primary);
+  background: var(--df-primary-light);
+  border-radius: 16px;
+  font-size: 24px;
+}
+
+.feature-placeholder h3 {
+  margin-bottom: 9px;
+  font-size: 15px;
+}
+
+.feature-placeholder p {
+  max-width: 360px;
+  margin-bottom: 0;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.metadata-card {
+  padding: 22px;
+}
+
+.metadata-card > h2 {
+  margin-bottom: 22px;
+  font-size: 15px;
+}
+
+.metadata-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 15px 0;
+  border-top: 1px solid var(--df-border);
+}
+
+.metadata-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--df-text-secondary);
+  font-size: 11px;
+}
+
+.metadata-label i {
+  font-size: 14px;
+}
+
+.metadata-value {
+  color: var(--df-text);
+  font-size: 12px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.details-help-card {
+  padding: 21px;
+  background: #eef2ff;
+  border-color: #e0e7ff;
+}
+
+.help-icon {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  color: var(--df-primary);
+  background: #fff;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+.details-help-card h3 {
+  margin: 15px 0 8px;
+  font-size: 14px;
+}
+
+.details-help-card p {
+  margin-bottom: 0;
+  color: #475569;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+@media (max-width: 1100px) {
+  .details-layout {
+    grid-template-columns: minmax(0, 1fr) 260px;
+    gap: 16px;
+  }
+
+  .details-header-actions {
+    gap: 6px;
+  }
+}
+
+@media (max-width: 850px) {
+  .details-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .details-sidebar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+
+@media (max-width: 550px) {
+  .details-header-actions {
+    width: 100%;
+  }
+
+  .details-header-actions .btn {
+    flex: 1;
+  }
+
+  .project-overview-card,
+  .project-work-card,
+  .metadata-card {
+    padding: 18px;
+  }
+
+  .details-sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .overview-title h2 {
+    font-size: 18px;
+  }
+}

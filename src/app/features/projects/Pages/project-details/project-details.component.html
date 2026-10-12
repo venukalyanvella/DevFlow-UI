@@ -1,0 +1,198 @@
+
+<section class="df-page project-details-page" *ngIf="project as p">
+
+  <!-- Breadcrumb and actions -->
+  <header class="df-page-header">
+    <div>
+      <div class="page-eyebrow">
+        <a routerLink="/projects/list">Projects</a>
+        <i class="bi bi-chevron-right"></i>
+        <span>{{ p.name }}</span>
+      </div>
+
+      <h1 class="df-page-title">{{ p.name }}</h1>
+
+      <p class="df-page-description">
+        Project overview and workspace information.
+      </p>
+    </div>
+
+    <div class="details-header-actions">
+      <a
+        class="btn btn-light border"
+        routerLink="/projects"
+      >
+        <i class="bi bi-arrow-left me-2"></i>
+        Back
+      </a>
+
+      <a
+        class="btn btn-primary"
+        [routerLink]="['/projects', p.projectId, 'edit']"
+      >
+        <i class="bi bi-pencil me-2"></i>
+        Edit project
+      </a>
+
+      <button
+        type="button"
+        class="btn btn-outline-danger"
+        (click)="deleteProject()"
+        [disabled]="isDeleting"
+      >
+        <i class="bi bi-trash me-2"></i>
+        {{ isDeleting ? 'Deleting...' : 'Delete' }}
+      </button>
+    </div>
+  </header>
+
+  <!-- Loading -->
+  <div class="df-card loading-state" *ngIf="isLoading">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading project...</span>
+    </div>
+    <p>Loading project details...</p>
+  </div>
+
+  <!-- Error -->
+  <div class="alert alert-danger" *ngIf="errorMessage">
+    <i class="bi bi-exclamation-circle me-2"></i>
+    {{ errorMessage }}
+  </div>
+
+  <!-- Overview -->
+  <div class="details-layout" *ngIf="!isLoading && !errorMessage">
+
+    <div class="details-main">
+
+      <div class="df-card project-overview-card">
+        <div class="overview-heading">
+          <div class="overview-project-icon">
+            <i class="bi bi-kanban"></i>
+          </div>
+
+          <div class="overview-title">
+            <span class="project-reference">
+              PROJECT ID: PRJ-{{ p.projectId }}
+            </span>
+            <h2>{{ p.name }}</h2>
+          </div>
+        </div>
+
+        <div class="overview-divider"></div>
+
+        <h3 class="section-subtitle">About this project</h3>
+
+        <p class="overview-description">
+          {{
+            p.description ||
+            'No description has been added to this project yet.'
+          }}
+        </p>
+      </div>
+
+      <!-- Future feature area -->
+      <div class="df-card project-work-card">
+        <div class="section-heading-row">
+          <div>
+            <h2>Project work</h2>
+            <p>Tasks and activity associated with this project.</p>
+          </div>
+        </div>
+
+        <div class="feature-placeholder">
+          <div class="placeholder-icon">
+            <i class="bi bi-kanban"></i>
+          </div>
+
+          <h3>Task board coming next</h3>
+
+          <p>
+            This space will show project tasks, their status, assignments
+            and recent activity as those features are implemented.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Project metadata -->
+    <aside class="details-sidebar">
+
+      <div class="df-card metadata-card">
+        <h2>Project details</h2>
+
+        <div class="metadata-item">
+          <span class="metadata-label">
+            <i class="bi bi-hash"></i>
+            Project ID
+          </span>
+          <span class="metadata-value">{{ p.projectId }}</span>
+        </div>
+
+        <div class="metadata-item">
+          <span class="metadata-label">
+            <i class="bi bi-calendar-plus"></i>
+            Created
+          </span>
+          <span class="metadata-value">
+            {{
+              p.createdAt
+                ? (p.createdAt | date:'mediumDate')
+                : 'Not available'
+            }}
+          </span>
+        </div>
+
+        <div class="metadata-item">
+          <span class="metadata-label">
+            <i class="bi bi-clock-history"></i>
+            Last updated
+          </span>
+          <span class="metadata-value">
+            {{
+              p.updatedAt
+                ? (p.updatedAt | date:'mediumDate')
+                : 'Not available'
+            }}
+          </span>
+        </div>
+      </div>
+
+      <div class="df-card details-help-card">
+        <div class="help-icon">
+          <i class="bi bi-lightbulb"></i>
+        </div>
+
+        <h3>Keep your project moving</h3>
+
+        <p>
+          Break your project into smaller tasks and track progress
+          through your team's workflow.
+        </p>
+      </div>
+
+    </aside>
+
+  </div>
+
+</section>
+
+<!-- Missing project fallback -->
+<section
+  class="df-page"
+  *ngIf="!isLoading && !project && !errorMessage"
+>
+  <div class="df-card empty-state">
+    <div class="empty-state-icon">
+      <i class="bi bi-folder-x"></i>
+    </div>
+
+    <h3>Project not found</h3>
+    <p>The project may have been removed or the link may be incorrect.</p>
+
+    <a routerLink="/projects" class="btn btn-primary">
+      Return to projects
+    </a>
+  </div>
+</section>

@@ -1,0 +1,215 @@
+
+<section class="df-page project-form-page">
+
+  <header class="df-page-header">
+    <div>
+      <div class="page-eyebrow">
+        <a routerLink="/projects">Projects</a>
+        <i class="bi bi-chevron-right"></i>
+        {{ isEditMode ? 'Edit project' : 'New project' }}
+      </div>
+
+      <h1 class="df-page-title">
+        {{ isEditMode ? 'Edit project' : 'Create a project' }}
+      </h1>
+
+      <p class="df-page-description">
+        {{
+          isEditMode
+            ? 'Update your project information.'
+            : 'Set up a project and give your team a clear starting point.'
+        }}
+      </p>
+    </div>
+
+    <a routerLink="/projects" class="btn btn-light border">
+      <i class="bi bi-arrow-left me-2"></i>
+      Back to projects
+    </a>
+  </header>
+
+  <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-layout">
+
+      <!-- Main form -->
+      <div class="form-main">
+
+        <div class="df-card form-section">
+          <div class="form-section-heading">
+            <div class="form-section-icon">
+              <i class="bi bi-info-circle"></i>
+            </div>
+
+            <div>
+              <h2>Project information</h2>
+              <p>Provide the essential details for your project.</p>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label for="projectName" class="form-label">
+              Project name <span class="text-danger">*</span>
+            </label>
+
+            <input
+              id="projectName"
+              type="text"
+              class="form-control"
+              formControlName="name"
+              placeholder="e.g. Customer Portal"
+              maxlength="100"
+              [class.is-invalid]="
+                projectForm.get('name')?.invalid &&
+                projectForm.get('name')?.touched
+              "
+            />
+
+            <div
+              class="invalid-feedback"
+              *ngIf="projectForm.get('name')?.hasError('required') &&
+                     projectForm.get('name')?.touched"
+            >
+              Project name is required.
+            </div>
+
+            <div
+              class="invalid-feedback"
+              *ngIf="projectForm.get('name')?.hasError('maxlength')"
+            >
+              Project name cannot exceed 100 characters.
+            </div>
+
+            <div class="field-hint">
+              Use a short, descriptive name your team will recognize.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="projectDescription" class="form-label">
+              Description
+            </label>
+
+            <textarea
+              id="projectDescription"
+              class="form-control description-input"
+              formControlName="description"
+              rows="6"
+              maxlength="1000"
+              placeholder="What is this project about? Describe its goals and expected outcome..."
+            ></textarea>
+
+            <div class="field-hint">
+              Explain the project goals, scope and expected outcome.
+            </div>
+          </div>
+        </div>
+
+        <div class="df-card form-section">
+          <div class="form-section-heading">
+            <div class="form-section-icon">
+              <i class="bi bi-lightbulb"></i>
+            </div>
+
+            <div>
+              <h2>Before you create</h2>
+              <p>A few tips for keeping your workspace organized.</p>
+            </div>
+          </div>
+
+          <ul class="form-tips">
+            <li>
+              <i class="bi bi-check-circle"></i>
+              Choose a unique, recognizable project name.
+            </li>
+            <li>
+              <i class="bi bi-check-circle"></i>
+              Keep the description focused on the project objective.
+            </li>
+            <li>
+              <i class="bi bi-check-circle"></i>
+              You can add tasks and team members after creating the project.
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Side panel -->
+      <aside class="form-sidebar">
+
+        <div class="df-card preview-card">
+          <span class="preview-label">PREVIEW</span>
+
+          <div class="preview-project-icon">
+            <i class="bi bi-kanban"></i>
+          </div>
+
+          <!-- <h3>
+            {{ projectForm.get('name')?.value || 'Your project name' }}
+          </h3> -->
+
+          <!-- <p>
+            {{
+              projectForm.get('description')?.value ||
+              'Your project description will appear here.'
+            }}
+          </p> -->
+
+          <div class="preview-divider"></div>
+
+          <div class="preview-meta">
+            <span>Project type</span>
+            <span>Workspace project</span>
+          </div>
+
+          <div class="preview-meta">
+            <span>Created by</span>
+            <span>Current user</span>
+          </div>
+        </div>
+
+        <div class="form-help-card">
+          <i class="bi bi-question-circle"></i>
+          <h3>Need help?</h3>
+          <p>
+            Start with a clear project goal. You can organize work into tasks
+            once your project is created.
+          </p>
+        </div>
+
+      </aside>
+
+    </div>
+
+    <!-- Form actions -->
+    <div class="form-actions">
+      <a routerLink="/projects" class="btn btn-light border">
+        Cancel
+      </a>
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="isSaving"
+      >
+        <span
+          *ngIf="isSaving"
+          class="spinner-border spinner-border-sm me-2"
+        ></span>
+
+        <i
+          *ngIf="!isSaving"
+          class="bi bi-check2 me-2"
+        ></i>
+
+        {{ isSaving
+          ? 'Saving...'
+          : (isEditMode ? 'Save changes' : 'Create project')
+        }}
+      </button>
+    </div>
+
+  </form>
+
+</section>

@@ -1,0 +1,298 @@
+
+<section class="df-page project-list-page">
+
+  <!-- Page heading -->
+  <header class="df-page-header">
+    <div>
+      <div class="page-eyebrow">
+        <i class="bi bi-grid"></i>
+        WORKSPACE / PROJECTS
+      </div>
+
+      <h1 class="df-page-title">Projects</h1>
+
+      <p class="df-page-description">
+        Organize your work, track progress and manage projects in one place.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-primary create-project-btn"
+      routerLink="/projects/form"
+    >
+      <i class="bi bi-plus-lg me-2"></i>
+      Create project
+    </button>
+  </header>
+
+  <!-- Summary -->
+  <div *ngIf="false" class="project-summary">
+    <div class="summary-item">
+      <span class="summary-icon purple">
+        <i class="bi bi-kanban"></i>
+      </span>
+      <div>
+        <span class="summary-label">Total projects</span>
+        <!-- <h2>{{ filteredProjects.length }}</h2>// -->
+        <H2> 15 </H2>
+      </div>
+    </div>
+
+    <div class="summary-item">
+      <span class="summary-icon blue">
+        <i class="bi bi-folder2-open"></i>
+      </span>
+      <div>
+        <span class="summary-label">Search results</span>
+       <H2> 15 </H2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search and controls -->
+  <div class="project-toolbar">
+    <div class="project-search">
+      <i class="bi bi-search"></i>
+      <input
+        type="search"
+        class="form-control"
+        placeholder="Search projects by name..."
+        aria-label="Search projects"
+        [(ngModel)]="searchTerm"
+      />
+    </div>
+
+    <div class="toolbar-actions">
+      <button
+        type="button"
+        class="btn btn-light border"
+        (click)="loadProjects()"
+        [disabled]="isLoading"
+      >
+        <i class="bi bi-arrow-clockwise me-1"></i>
+        Refresh
+      </button>
+
+      <div class="view-toggle">
+        <button
+          type="button"
+          class="view-button"
+          [class.active]="viewMode === 'grid'"
+          (click)="viewMode = 'grid'"
+          aria-label="Grid view"
+        >
+          <i class="bi bi-grid-3x3-gap"></i>
+        </button>
+
+        <button
+          type="button"
+          class="view-button"
+          [class.active]="viewMode === 'list'"
+          (click)="viewMode = 'list'"
+          aria-label="List view"
+        >
+          <i class="bi bi-list-ul"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div class="df-card loading-state" *ngIf="isLoading">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p>Loading projects...</p>
+  </div>
+
+  <!-- Error -->
+  <div class="alert alert-danger" *ngIf="false">
+    <i class="bi bi-exclamation-circle me-2"></i>
+    {{ errorMessage }}
+
+    <button
+      type="button"
+      class="btn btn-sm btn-outline-danger ms-3"
+
+    >
+      Try again
+    </button>
+  </div>
+
+  <!-- Empty state -->
+  <div *ngIf="false"
+    class="df-card empty-state"
+
+  >
+    <div class="empty-state-icon">
+      <i class="bi bi-folder2-open"></i>
+    </div>
+
+    <!-- <h3>
+      {{ searchTerm ? 'No matching projects' : 'No projects yet' }}
+    </h3> -->
+
+    <!-- <p>
+      {{
+        searchTerm
+          ? 'Try another search term.'
+          : 'Create your first project to get started with DevFlow.'
+      }}
+    </p> -->
+
+    <button
+
+      type="button"
+      class="btn btn-primary"
+      routerLink="/projects/new"
+    >
+      <i class="bi bi-plus-lg me-2"></i>
+      Create your first project
+    </button>
+  </div>
+
+  <!-- Grid view -->
+  <!-- <div
+    class="project-grid"
+
+  >
+    <app-project-card
+
+    ></app-project-card>
+  </div> -->
+
+  <!-- List view -->
+  <div
+    class="df-table-wrapper"
+
+  >
+    <table class="table project-table">
+      <thead>
+        <tr>
+          <th>Project</th>
+          <th>Project ID</th>
+          <th>Created</th>
+          <th class="text-end">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of [1,2,3,4,5,6]" >
+          <td>
+            <div class="table-project-name">
+              <span class="table-project-icon">
+                <i class="bi bi-kanban"></i>
+              </span>
+
+              <div>
+                <div class="fw-semibold"> Hrms </div>
+                <small class="text-muted">
+                 A small description of the project goes here. It can be a brief overview or summary of the project's purpose and objectives.
+                </small>
+              </div>
+            </div>
+          </td>
+
+          <td>
+            <span class="project-id">
+              PRJ-1
+            </span>
+          </td>
+
+          <td>
+           15 OCT
+          </td>
+
+          <td class="text-end">
+            <a
+              class="btn btn-sm btn-light border me-1"
+
+              title="View details"
+            >
+              <i class="bi bi-eye"></i>
+            </a>
+
+            <a
+              class="btn btn-sm btn-light border"
+
+              title="Edit project"
+            >
+              <i class="bi bi-pencil"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer
+    class="project-list-footer"
+    *ngIf="!isLoading && !errorMessage && filteredProjects.length > 0"
+  >
+    Showing {{ filteredProjects.length }} project(s)
+  </footer>
+
+<div class="pagination-toolbar" *ngIf="!isLoading && !errorMessage">
+  <!-- Left: record count and page size -->
+  <div class="pagination-info">
+    <span class="record-count">
+      Showing <strong>{{ startRecord }}–{{ endRecord }}</strong>
+      of <strong>{{ totalRecords }}</strong> records
+    </span>
+
+    <label for="pageSize" class="page-size-label">
+      Rows per page
+    </label>
+
+    <select
+      id="pageSize"
+      class="page-size-select"
+      [ngModel]="pageSize"
+      (ngModelChange)="onPageSizeChange($event)"
+    >
+      <option *ngFor="let size of pageSizeOptions" [ngValue]="size">
+        {{ size }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Right: page navigation -->
+  <nav class="pagination-nav" aria-label="Project pagination">
+    <button
+      type="button"
+      class="pagination-btn"
+      (click)="previousPage()"
+      [disabled]="currentPage === 1 || totalPages === 0"
+      aria-label="Previous page"
+    >
+      <i class="bi bi-chevron-left"></i>
+      <span>Previous</span>
+    </button>
+
+    <button
+      *ngFor="let page of pageNumbers"
+      type="button"
+      class="pagination-btn page-number"
+      [class.active]="currentPage === page"
+      [attr.aria-current]="currentPage === page ? 'page' : null"
+      (click)="goToPage(page)"
+    >
+      {{ page }}
+    </button>
+
+    <button
+      type="button"
+      class="pagination-btn"
+      (click)="nextPage()"
+      [disabled]="currentPage >= totalPages || totalPages === 0"
+      aria-label="Next page"
+    >
+      <span>Next</span>
+      <i class="bi bi-chevron-right"></i>
+    </button>
+  </nav>
+</div>
+
+
+</section>

@@ -14,7 +14,7 @@ export class SidebarComponent {
       title: 'WORKSPACE',
       items: [
         { label: 'Dashboard', icon: 'bi-grid-1x2', route: '/dashboard' },
-        { label: 'Projects', icon: 'bi-kanban', route: '/projects' },
+        { label: 'Projects', icon: 'bi-kanban', route: '/projects/list' },
         { label: 'My Tasks', icon: 'bi-check2-square', route: '/tasks' },
         { label: 'Sprints', icon: 'bi-calendar3', route: '/sprints' }
       ]

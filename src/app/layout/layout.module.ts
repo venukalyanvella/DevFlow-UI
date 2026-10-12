@@ -12,6 +12,12 @@ const routes :Routes = [
   {
     path:'',
     component: LayoutComponent,
+    children:[
+      {
+        path:'projects',
+        loadChildren: () => import('../features/projects/projects.module').then(m => m.ProjectsModule)
+      }
+    ]
   }
 
 ];
