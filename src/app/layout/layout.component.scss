@@ -1,0 +1,56 @@
+
+:host {
+  display: block;
+}
+
+.app-shell {
+  --sidebar-width: 250px;
+  --topbar-height: 68px;
+  --footer-height: 48px;
+
+  min-height: 100vh;
+}
+
+.app-workspace {
+  margin-left: var(--sidebar-width);
+  height: 100vh;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: margin-left 0.25s ease;
+}
+
+.app-shell.sidebar-collapsed {
+  --sidebar-width: 76px;
+}
+
+/* Only this region scrolls vertically */
+.content-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top: var(--topbar-height);
+  padding-bottom: var(--footer-height);
+  background: var(--df-page-bg);
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+.content-container {
+  max-width: 1600px;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 28px;
+}
+
+@media (max-width: 768px) {
+  .app-workspace {
+    margin-left: 76px;
+  }
+
+  .content-container {
+    padding: 16px;
+  }
+}

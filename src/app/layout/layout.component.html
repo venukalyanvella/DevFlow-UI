@@ -1,0 +1,23 @@
+
+<div
+  class="app-shell"
+  [class.sidebar-collapsed]="isSidebarCollapsed"
+>
+  <app-sidebar
+    (toggleSidebar)="toggleSidebar()"
+  ></app-sidebar>
+
+  <div class="app-workspace">
+    <app-topbar
+      (toggleSidebar)="toggleSidebar()"
+    ></app-topbar>
+
+    <main class="content-scroll">
+      <div class="content-container">
+        <app-main-content></app-main-content>
+      </div>
+    </main>
+
+    <app-footer></app-footer>
+  </div>
+</div>
